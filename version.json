@@ -1,6 +1,6 @@
 {
-    "latest_version": "1.5.2",
+    "latest_version": "1.5.3",
     "release_date": "2026-07-10",
-    "update_details": "แยกไฟล์เซิร์ฟเวอร์กลางออกจากแพ็กอัปเดต: ไม่ส่งเครื่องมือสร้าง License, PIN, db_connect และไฟล์เฉพาะเครื่อง",
-    "download_url": "https://github.com/atipolklaypaksi-cell/tham-Hos-safe/raw/main/releases/update_1.5.2.zip"
+    "update_details": "ปรับแหล่งอัปเดตเป็นแบบ Cyto (version.json + zip) + เช็คอัปเดตอัตโนมัติเมื่อมีเน็ต (เลื่อนเตือน 7/30 วันได้)",
+    "download_url": "https://github.com/atipolklaypaksi-cell/tham-Hos-safe/raw/main/update_1.5.3.zip"
 }
