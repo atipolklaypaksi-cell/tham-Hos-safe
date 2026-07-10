@@ -1,0 +1,48 @@
+-- Drug Reconciliation — เปรียบเทียบยาเดิม/ยาใหม่ + ส่งแพทย์
+CREATE TABLE IF NOT EXISTS drug_reconciliation_session (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hn VARCHAR(9) NOT NULL DEFAULT '',
+    an VARCHAR(9) NULL DEFAULT NULL,
+    vn VARCHAR(12) NULL DEFAULT NULL,
+    visit_type VARCHAR(8) NOT NULL DEFAULT 'ipd' COMMENT 'ipd | opd',
+    patient_name VARCHAR(200) NOT NULL DEFAULT '',
+    doctor_code VARCHAR(25) NOT NULL DEFAULT '',
+    doctor_name VARCHAR(200) NOT NULL DEFAULT '',
+    ward_name VARCHAR(100) NOT NULL DEFAULT '',
+    status VARCHAR(16) NOT NULL DEFAULT 'draft' COMMENT 'draft | sent | cancelled',
+    pharmacist_user_id INT NOT NULL DEFAULT 0,
+    pharmacist_name VARCHAR(120) NOT NULL DEFAULT '',
+    pharmacist_note TEXT NULL,
+    doctor_note TEXT NULL,
+    sent_at DATETIME NULL DEFAULT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_dr_session_hn (hn),
+    INDEX idx_dr_session_an (an),
+    INDEX idx_dr_session_status (status),
+    INDEX idx_dr_session_created (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS drug_reconciliation_item (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    session_id INT NOT NULL,
+    list_type VARCHAR(12) NOT NULL DEFAULT 'baseline' COMMENT 'baseline | current',
+    row_key VARCHAR(64) NOT NULL DEFAULT '',
+    icode VARCHAR(7) NOT NULL DEFAULT '',
+    drug_name VARCHAR(250) NOT NULL DEFAULT '',
+    drug_name_tmt VARCHAR(250) NOT NULL DEFAULT '',
+    strength VARCHAR(100) NOT NULL DEFAULT '',
+    qty DECIMAL(12,3) NOT NULL DEFAULT 0,
+    units VARCHAR(50) NOT NULL DEFAULT '',
+    method TEXT NULL,
+    source_label VARCHAR(120) NOT NULL DEFAULT '',
+    source_date DATE NULL DEFAULT NULL,
+    match_group VARCHAR(64) NOT NULL DEFAULT '',
+    recon_action VARCHAR(12) NOT NULL DEFAULT '' COMMENT 'continue | hold | off',
+    pharmacist_comment VARCHAR(500) NOT NULL DEFAULT '',
+    sort_order INT NOT NULL DEFAULT 0,
+    is_manual TINYINT(1) NOT NULL DEFAULT 0,
+    INDEX idx_dr_item_session (session_id),
+    INDEX idx_dr_item_match (match_group),
+    CONSTRAINT fk_dr_item_session FOREIGN KEY (session_id) REFERENCES drug_reconciliation_session(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS entryposition_role_map (
+    entryposition VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL DEFAULT 'general_staff',
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (entryposition)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

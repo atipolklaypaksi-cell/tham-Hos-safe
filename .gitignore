@@ -1,0 +1,33 @@
+# ความลับ / config ของแต่ละ รพ. — ห้ามขึ้น GitHub
+db_connect.php
+connect_local.php
+license.key
+.env
+.env.*
+*.pem
+
+# ข้อมูลรันไทม์
+uploads/
+logs/
+storage/
+file/
+tmp/
+temp/
+_notes/
+พื้นที่รับผิดชอบ/
+
+# แพ็กเกจอัปเดตชั่วคราวในเครื่อง (เก็บ releases/*.zip ไว้ขึ้น GitHub ได้)
+dist/
+update_temp.zip
+
+# ระบบ / IDE
+.git/
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# vendor ขนาดใหญ่ (ติดตั้งแยกถ้าจำเป็น)
+# vendor/
