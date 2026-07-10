@@ -1,8 +1,27 @@
 <?php
 /**
  * Helper: License Generator & Deployment Map Tracker
+ * ไฟล์ license_admin_config.php มีเฉพาะเซิร์ฟเวอร์กลาง — รพ.ใช้ค่า default ด้านล่าง
  */
-require_once __DIR__ . '/license_admin_config.php';
+if (is_file(__DIR__ . '/license_admin_config.php')) {
+    require_once __DIR__ . '/license_admin_config.php';
+} else {
+    if (!defined('LICENSE_MASTER_PIN')) {
+        define('LICENSE_MASTER_PIN', '');
+    }
+    if (!defined('LICENSE_SECRET_KEY')) {
+        define('LICENSE_SECRET_KEY', 'tham-hossafe-license-secret-change-me-32ch');
+    }
+    if (!defined('LICENSE_STORAGE_DIR')) {
+        define('LICENSE_STORAGE_DIR', __DIR__ . '/storage/licenses');
+    }
+    if (!defined('LICENSE_DEFAULT_LAT')) {
+        define('LICENSE_DEFAULT_LAT', 13.7563);
+    }
+    if (!defined('LICENSE_DEFAULT_LNG')) {
+        define('LICENSE_DEFAULT_LNG', 100.5018);
+    }
+}
 
 function license_admin_ensure_table($con) {
     static $done = false;

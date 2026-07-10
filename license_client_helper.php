@@ -3,7 +3,6 @@
  * ตัวอย่าง: ตรวจสอบ license.key ฝั่งรพ. (วางในเครื่องรพ. หลังได้รับไฟล์จาก Admin)
  * ใช้ LICENSE_SECRET_KEY ชุดเดียวกับ license_admin_config.php
  */
-require_once __DIR__ . '/license_admin_config.php';
 require_once __DIR__ . '/license_admin_helper.php';
 
 function license_client_validate_file($path) {

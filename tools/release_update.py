@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPO = "atipolklaypaksi-cell/tham-Hos-safe"
 BRANCH = "main"
 
-# ไฟล์/โฟลเดอร์ที่ห้ามใส่ใน zip อัปเดต
+# ไฟล์/โฟลเดอร์ที่ห้ามใส่ใน zip อัปเดต (ของแต่ละ รพ. / เซิร์ฟเวอร์กลาง)
 EXCLUDE_NAMES = {
     ".git",
     ".gitignore",
@@ -35,9 +35,17 @@ EXCLUDE_NAMES = {
     ".vscode",
     ".DS_Store",
     "Thumbs.db",
+    # การเชื่อมต่อ / ความลับของแต่ละ รพ.
     "db_connect.php",
+    "connect_local.php",
     "license.key",
     ".env",
+    # เครื่องมือ License ของเซิร์ฟเวอร์กลางเท่านั้น
+    "admin_generate_key.php",
+    "admin_license_generator.php",
+    "license_admin_config.php",
+    "deployment_map_local.php",
+    # runtime / build
     "dist",
     "uploads",
     "logs",
@@ -48,6 +56,7 @@ EXCLUDE_NAMES = {
     "_notes",
     "พื้นที่รับผิดชอบ",
     "update_temp.zip",
+    "tools",
 }
 
 EXCLUDE_GLOBS = [
@@ -56,6 +65,7 @@ EXCLUDE_GLOBS = [
     ".env.*",
     "releases/*.zip",
     "dist/*",
+    "storage/**",
 ]
 
 

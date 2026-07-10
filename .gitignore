@@ -6,6 +6,12 @@ license.key
 .env.*
 *.pem
 
+# เครื่องมือ License / override ของเซิร์ฟเวอร์กลางเท่านั้น
+admin_generate_key.php
+admin_license_generator.php
+license_admin_config.php
+deployment_map_local.php
+
 # ข้อมูลรันไทม์
 uploads/
 logs/

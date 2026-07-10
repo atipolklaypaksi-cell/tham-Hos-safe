@@ -121,6 +121,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <?php
 require_once __DIR__ . '/menu_permissions_helper.php';
 require_once __DIR__ . '/deployment_map_config.php';
+if (is_file(__DIR__ . '/deployment_map_local.php')) {
+    require_once __DIR__ . '/deployment_map_local.php';
+}
 if (isset($_SESSION['user_id']) && empty($_SESSION['menu_permissions_loaded'])) {
     if (!isset($con)) {
         include_once __DIR__ . '/connect.php';
@@ -520,7 +523,12 @@ $show_admin = tham_menu_group_visible('group_admin');
                     <a href="upgrade.php"><i class="fas fa-rocket me-2"></i> อัปเกรดระบบ</a>
                 </li>
                 <?php endif; ?>
-                <?php if (defined('THAM_LICENSE_ADMIN_ENABLED') && THAM_LICENSE_ADMIN_ENABLED && tham_menu_can('admin.license')): ?>
+                <?php if (
+                    defined('THAM_LICENSE_ADMIN_ENABLED')
+                    && THAM_LICENSE_ADMIN_ENABLED
+                    && is_file(__DIR__ . '/admin_generate_key.php')
+                    && tham_menu_can('admin.license')
+                ): ?>
                 <li class="<?= $current_page === 'admin_generate_key.php' ? 'active' : '' ?>">
                     <a href="admin_generate_key.php"><i class="fas fa-key me-2"></i> สร้าง License</a>
                 </li>

@@ -637,6 +637,30 @@ if (version_compare($db_version, APP_VERSION, '<')) {
         $db_version = '1.5.3';
     }
 
+    if (version_compare($db_version, '1.5.4', '<')) {
+        // รพ.ทั่วไป: ลบเครื่องมือสร้าง License ออกถ้าไม่ได้เปิดโหมดเซิร์ฟเวอร์กลาง
+        if (is_file(__DIR__ . '/deployment_map_config.php')) {
+            require_once __DIR__ . '/deployment_map_config.php';
+        }
+        if (is_file(__DIR__ . '/deployment_map_local.php')) {
+            require_once __DIR__ . '/deployment_map_local.php';
+        }
+        $is_license_admin = defined('THAM_LICENSE_ADMIN_ENABLED') && THAM_LICENSE_ADMIN_ENABLED;
+        if (!$is_license_admin) {
+            foreach (['admin_generate_key.php', 'admin_license_generator.php', 'license_admin_config.php'] as $admin_file) {
+                $path = __DIR__ . '/' . $admin_file;
+                if (is_file($path)) {
+                    @unlink($path);
+                }
+            }
+            echo "<li>✅ ลบเครื่องมือ License ของเซิร์ฟเวอร์กลางออกจากเครื่อง รพ. แล้ว</li>";
+        } else {
+            echo "<li>✅ โหมดเซิร์ฟเวอร์กลาง — คงเครื่องมือสร้าง License ไว้</li>";
+        }
+        mysqli_query($con, "UPDATE sys_config SET config_value = '1.5.4' WHERE config_name = 'db_version'");
+        $db_version = '1.5.4';
+    }
+
     echo "</ul>";
     echo "<h3 style='color: #27ae60;'>🎉 อัปเดตฐานข้อมูลเสร็จสมบูรณ์!</h3>";
 } else {

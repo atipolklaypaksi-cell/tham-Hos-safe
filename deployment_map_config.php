@@ -6,6 +6,8 @@
 define('THAM_DEPLOYMENT_MAP_URL', 'http://61.7.167.197/thamhossafe/map_dashboard.php');
 
 /**
- * เปิดเมนู "สร้าง License" ใน Admin — ตั้ง true เฉพาะเซิร์ฟเวอร์กลางเท่านั้น
+ * เปิดเมนู "สร้าง License" ใน Admin
+ * ค่าเริ่มต้นสำหรับ รพ. = false
+ * เซิร์ฟเวอร์กลางให้สร้าง deployment_map_local.php แล้วตั้งเป็น true
  */
-define('THAM_LICENSE_ADMIN_ENABLED', true);
+define('THAM_LICENSE_ADMIN_ENABLED', false);
